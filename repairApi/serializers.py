@@ -17,3 +17,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'repair_orders']
+
+
+# class RepairNumSerializer(serializers.ModelSerializer):
+#     start = serializers.ReadOnlyField(RepairOrder.objects.filter(state='1', owner=user).count())
+#     wait = serializers.ReadOnlyField()
+#     end = serializers.ReadOnlyField()
