@@ -59,6 +59,9 @@ class RepairFeedbackDetail(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
+# class RepairNotFeedBackList(generics.ListCreateAPIView):
+#
+
 
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
