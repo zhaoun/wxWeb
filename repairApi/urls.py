@@ -12,7 +12,8 @@ urlpatterns = [
     path('user/', views.AUser.as_view()),
     path('users/create/', views.UserCreated),
     path('repair/feedback/', views.RepairFeedbackList.as_view()),
-    path('repair/feedback/<int:pk>', views.RepairFeedbackDetail.as_view())
+    path('repair/feedback/<int:pk>', views.RepairFeedbackDetail.as_view()),
+    path('repair/notfeedback/', views.RepairNotFeedBackList.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

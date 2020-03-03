@@ -1,5 +1,5 @@
 from repairApi.models import RepairOrder, RepairFeedback
-from repairApi.serializers import RepairSerializer, UserSerializer, AUserSerializer, RepairFeedbackSerializer
+from repairApi.serializers import RepairSerializer, UserSerializer, AUserSerializer, RepairFeedbackSerializer, RepairNotFeedbackSerializer
 from rest_framework import generics, permissions, views
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -59,8 +59,20 @@ class RepairFeedbackDetail(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
-# class RepairNotFeedBackList(generics.ListCreateAPIView):
-#
+
+class RepairNotFeedBackList(generics.ListCreateAPIView):
+    serializer_class = RepairNotFeedbackSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        staff = self.request.user.is_staff
+        feedback_id = RepairFeedback.objects.values_list('order')
+        if staff:
+            return RepairOrder.objects.filter(worker=user, state=3).exclude(id__in=feedback_id)
+        else:
+            return RepairOrder.objects.filter(owner=user)
 
 
 class UserList(generics.ListAPIView):

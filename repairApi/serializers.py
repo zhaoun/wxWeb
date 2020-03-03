@@ -12,6 +12,15 @@ class RepairSerializer(serializers.ModelSerializer):
         fields = ('id', 'dorm', 'cause', 'owner', 'state', 'createTime', 'worker', 'image')
 
 
+class RepairNotFeedbackSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    worker = serializers.ReadOnlyField(source='worker.username')
+
+    class Meta:
+        model = RepairOrder
+        fields = ('id', 'dorm', 'owner', 'worker')
+
+
 class RepairFeedbackSerializer(serializers.ModelSerializer):
     # owner = serializers.ReadOnlyField(source='order.owner.username')
     # owner = serializers.ReadOnlyField(source='owner.username')
