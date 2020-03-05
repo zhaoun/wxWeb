@@ -18,7 +18,7 @@ class RepairNotFeedbackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RepairOrder
-        fields = ('id', 'dorm', 'owner', 'worker')
+        fields = ('id', 'dorm', 'owner', 'worker', 'createTime')
 
 
 class RepairFeedbackSerializer(serializers.ModelSerializer):
